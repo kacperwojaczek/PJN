@@ -22,13 +22,20 @@ class Review:
 
 	def __init__(self, title):
 		self.movieTitle = title
-		self.fetchReview()
-		self.fetchRating()
+		try:
+			self.fetchReview()
+			self.fetchRating()
+		except:
+			print 'Film not found'
+			self.movieTitle = ''
+			self.reviewContent = ''
+			self.movieRating = ''
 
 	def fetchReview(self):
 		response = requests.get(apiUrl + self.movieTitle + '&api-key=' + apiKey)
 		if response.status_code == 200:
 			response = response.json()
+			self.movieTitle = response['results'][0]['display_title']
 			self.parseReview(response['results'][0]['link']['url'])
 
 	def parseReview(self, reviewLink):

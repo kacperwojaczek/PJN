@@ -2,7 +2,9 @@
 
 import dataFetch
 
-review = dataFetch.Review('moana')
+review = dataFetch.Review('The Forest')
 
-
+print review.movieTitle
+print review.reviewContent
+print review.movieRating
 
